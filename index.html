@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+<link rel="stylesheet" href="output.css">
+<link rel="stylesheet" href="style.css">
+<link rel="shortcut icon" href="./icons/logo.svg" type="image/x-icon">
+</head>
+<body class="min-h-screen bg-primary  w-full" >
+ 
+<!-- wrapper -->
+<div class="w-full max-w-screen-xl mx-auto pt-5 px-5  ">
+
+
+<!-- header -->
+<div class="w-full md:h-16 h-auto py-5 flex gap-4 sm:gap-0 flex-col sm:flex-row justify-between ">
+
+    <!-- logo side -->
+<div class="">
+    <h1 class="text-white max-sm:text-center max-sm:border-b max-sm:pb-3 font-bold text-3xl md:text-2xl " >Weather</h1>
+</div>
+
+
+<!-- right side -->
+<div class="flex items-center gap-2 max-sm:w-full max-sm:px-10 max-sm:gap-5 max-sm:flex-col ">
+
+    <!-- search input -->
+<input id="cityInput" type="text" class="rounded-xl text-center max-sm:w-full bg-gray-700/90 text-gray-400 py-2 px-3 " placeholder="Enter city name"  />
+
+<!-- search button -->
+ <button  id="cityButton"  class="flex max-sm:justify-center px-3  max-sm:w-full py-2 gap-1 bg-white rounded-full w-fit h-fit  "  >
+    <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+ Search
+ </button>
+ <div  id="notification" class="notification absolute top-14 ">Please enter a city name.</div>
+
+<!-- current location -->
+<button id="locationBtn" class="flex  max-sm:justify-center  px-3  max-sm:w-full py-2 gap-1 bg-location rounded-full w-fit h-fit  " >
+    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.5017C14.4853 16.5017 16.5 14.487 16.5 12.0017C16.5 9.5164 14.4853 7.50168 12 7.50168C9.51472 7.50168 7.5 9.5164 7.5 12.0017C7.5 14.487 9.51472 16.5017 12 16.5017ZM12 14.5034C10.6184 14.5034 9.49832 13.3833 9.49832 12.0017C9.49832 10.62 10.6184 9.5 12 9.5C13.3816 9.5 14.5017 10.62 14.5017 12.0017C14.5017 13.3833 13.3816 14.5034 12 14.5034Z" fill="#0F0F0F"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M11 1C11 0.447715 11.4477 0 12 0C12.5523 0 13 0.447715 13 1V2.04938C17.7244 2.51844 21.4816 6.27558 21.9506 11H23C23.5523 11 24 11.4477 24 12C24 12.5523 23.5523 13 23 13H21.9506C21.4816 17.7244 17.7244 21.4816 13 21.9506V23C13 23.5523 12.5523 24 12 24C11.4477 24 11 23.5523 11 23V21.9506C6.27558 21.4816 2.51844 17.7244 2.04938 13H1C0.447715 13 0 12.5523 0 12C-1.19209e-07 11.4477 0.447715 11 1 11H2.04938C2.51844 6.27558 6.27558 2.51844 11 2.04938V1ZM12 20.0016C7.58083 20.0016 3.99839 16.4192 3.99839 12C3.99839 7.58083 7.58083 3.99839 12 3.99839C16.4192 3.99839 20.0016 7.58083 20.0016 12C20.0016 16.4192 16.4192 20.0016 12 20.0016Z" fill="#0F0F0F"/>
+        </svg>
+    current location
+</button>
+
+ </div>
+
+
+
+</div>
+
+
+<!-- hero section -->
+<div class="md:grid w-full h-screen  gap-y-3 gap-x-10  py-10 max-md:px-20 max-sm:px-5 grid-cols-7">
+
+    <!-- left section -->
+<div class="col-span-2 space-y-7 ">
+
+<!-- current weather -->
+ <div id="currentWeatherElement" class="w-full bg-secondary rounded-xl p-3 md:p-5">
+
+    <div class="flex justify-between items-center border-b py-2 md:py-4 ">
+        <!-- temprature -->
+          <div class="">
+              <h1 class="text-white  text-sm md:text-base font-normal ">Now</h1>
+              <h1 class="text-white text-3xl md:text-4xl font-semibold ">31.04&deg;C</h1>
+              <h1 class="text-white text-sm md:text-base font-normal">haze</h1>
+          </div>
+      
+          <!-- icon -->
+      <div class="mr-5" >
+      <svg width="45px"  height="45px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 6H20M7 12H17M9 18H15" stroke="gray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      </div>
+      
+      
+      </div>
+      <!-- date -->
+      <h1 class="flex gap-0.5 text-gray-400 items-center text-sm md:text-base py-2 capitalize " ><svg width="20px"  height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 10H21M7 3V5M17 3V5M6.2 21H17.8C18.9201
+           21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903
+            20.2843 20.782 19.908C21 19.4802 21 18.9201 21
+             17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903
+              5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5
+               18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202
+                5.21799C3.71569 5.40973 3.40973 5.71569 3.21799
+                 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201
+                  3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569
+                   20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2
+                    21Z" stroke="#d1d5db " stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>thursday, 31 ,Aug 2023</h1>
+      <!-- location -->
+      <h1 class="flex gap-0.5 text-gray-400 text-sm md:text-base items-center pb-2
+       capitalize " >
+       <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 21C15.5 17.4 19 14.1764 19 10.2C19 6.22355 15.866 3 12 3C8.13401 3 5 6.22355 5 10.2C5 14.1764 8.5 17.4 12 21Z" stroke="#9ca3af  " stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z" stroke="#9ca3af  " stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>london, UK</h1>
+      
+      
+ </div>
+
+<!-- 5 days forecast -->
+<div id="CardsFore" class="w-full shrink-0 bg-secondary max-sm:!my-7 rounded-xl p-3">
+    <h1 class="text-white text-2xl font-semibold ">5 days Forecast</h1>
+
+<!-- card 1 -->
+<div class="flex items-center justify-between py-2 ">
+<img src="https://openweathermap.org/img/wn/02d.png"  alt="weather image">
+<h1 class="text-white text-base font-semibold ">31.04&deg;C</h1>
+<h1 class="text-gray-400 text-sm font-medium ">1 Sep</h1>
+<h1 class="text-gray-400 text-sm font-medium ">Friday</h1>
+</div>
+
+
+<!-- card 2 -->
+<div class="flex items-center justify-between py-2 ">
+<img src="https://openweathermap.org/img/wn/02d.png"  alt="weather image">
+<h1 class="text-white text-base font-semibold ">31.04&deg;C</h1>
+<h1 class="text-gray-400 text-sm font-medium ">1 Sep</h1>
+<h1 class="text-gray-400 text-sm font-medium ">Friday</h1>
+</div>
+
+
+<!-- card 3 -->
+<div class="flex items-center justify-between py-2 ">
+
+<img src="https://openweathermap.org/img/wn/02d.png"  alt="weather image">
+<h1 class="text-white text-base font-semibold ">31.04&deg;C</h1>
+<h1 class="text-gray-400 text-sm font-medium ">1 Sep</h1>
+<h1 class="text-gray-400 text-sm font-medium ">Friday</h1>
+
+
+</div>
+
+<!-- card 4 -->
+<div class="flex items-center justify-between py-2 ">
+
+<img src="https://openweathermap.org/img/wn/02d.png"  alt="weather image">
+<h1 class="text-white text-base font-semibold ">31.04&deg;C</h1>
+<h1 class="text-gray-400 text-sm font-medium ">1 Sep</h1>
+<h1 class="text-gray-400 text-sm font-medium ">Friday</h1>
+
+
+</div>
+
+<!-- card 5 -->
+<div class="flex items-center justify-between py-2 ">
+
+<img src="https://openweathermap.org/img/wn/02d.png"  alt="weather image">
+<h1 class="text-white text-base font-semibold ">31.04&deg;C</h1>
+<h1 class="text-gray-400 text-sm font-medium ">1 Sep</h1>
+<h1 class="text-gray-400 text-sm font-medium ">Friday</h1>
+
+
+</div>
+
+
+
+<!-- end 5 days..   -->
+</div>
+
+<!-- end left side -->
+</div>
+
+
+
+
+
+<!-- right side -->
+<div class="col-span-5 !pb-10 ">
+
+<!-- title -->
+ <h1 class="text-white text-2xl py-2 font-semibold ">Today's Weather</h1>
+
+ <!-- top cards -->
+<div class="md:grid grid-cols-2 gap-7 mb-7">
+
+    <!-- air quality index -->
+<div id="airQuality" class="col-span-1 max-md:!mb-3 w-full bg-secondary rounded-xl pb-5 p-3">
+    <!-- title & air status -->
+<div class="flex justify-between py-2 ">
+    <h1 class="text-gray-400 capitalize text-base " >air quality index</h1>
+<p class="text-black bg-red-500 px-3 rounded-full py-1 capitalize " >very poor</p>
+</div>
+<div class="w-full flex gap-x-7 gap-y-3 flex-wrap">
+<!-- windd icon -->
+<div class="ml-5" >
+    <svg width="60px" height="60px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.25 5.5C6.25 3.70508 7.70507 2.25 9.5 2.25C11.2949 2.25 12.75 3.70507 12.75 5.5C12.75 7.29493 11.2949 8.75 9.5 8.75H3C2.58579 8.75 2.25 8.41421 2.25 8C2.25 7.58579 2.58579 7.25 3 7.25H9.5C10.4665 7.25 11.25 6.4665 11.25 5.5C11.25 4.5335 10.4665 3.75 9.5 3.75C8.5335 3.75 7.75 4.5335 7.75 5.5V5.85714C7.75 6.27136 7.41421 6.60714 7 6.60714C6.58579 6.60714 6.25 6.27136 6.25 5.85714V5.5ZM14.25 7.5C14.25 5.15279 16.1528 3.25 18.5 3.25C20.8472 3.25 22.75 5.15279 22.75 7.5C22.75 9.84721 20.8472 11.75 18.5 11.75H2C1.58579 11.75 1.25 11.4142 1.25 11C1.25 10.5858 1.58579 10.25 2 10.25H18.5C20.0188 10.25 21.25 9.01878 21.25 7.5C21.25 5.98122 20.0188 4.75 18.5 4.75C16.9812 4.75 15.75 5.98122 15.75 7.5V8C15.75 8.41421 15.4142 8.75 15 8.75C14.5858 8.75 14.25 8.41421 14.25 8V7.5ZM3.25 14C3.25 13.5858 3.58579 13.25 4 13.25H18.5C20.8472 13.25 22.75 15.1528 22.75 17.5C22.75 19.8472 20.8472 21.75 18.5 21.75C16.1528 21.75 14.25 19.8472 14.25 17.5V17C14.25 16.5858 14.5858 16.25 15 16.25C15.4142 16.25 15.75 16.5858 15.75 17V17.5C15.75 19.0188 16.9812 20.25 18.5 20.25C20.0188 20.25 21.25 19.0188 21.25 17.5C21.25 15.9812 20.0188 14.75 18.5 14.75H4C3.58579 14.75 3.25 14.4142 3.25 14Z" fill="#fff"/>
+        </svg>
+</div>
+
+<!-- 1 -->
+<div class="text-center">
+<p class="text-gray-400 uppercase font-medium " >PM2.5</p>
+<p class="text-white text-3xl font-medium " >131.55</p>
+</div>
+
+<!-- 1 -->
+<div class="text-center">
+<p class="text-gray-400 uppercase font-medium " >PM2.5</p>
+<p class="text-white text-3xl font-medium " >131.55</p>
+</div>
+
+<!-- 1 -->
+<div class="text-center">
+<p class="text-gray-400 uppercase font-medium " >PM2.5</p>
+<p class="text-white text-3xl font-medium " >131.55</p>
+</div>
+
+<!-- 1 -->
+<div class="text-center">
+<p class="text-gray-400 uppercase font-medium " >PM2.5</p>
+<p class="text-white text-3xl font-medium " >131.55</p>
+</div>
+
+<!-- 1 -->
+<div class="text-center">
+<p class="text-gray-400 uppercase font-medium " >PM2.5</p>
+<p class="text-white text-3xl font-medium " >131.55</p>
+</div>
+
+<!-- 1 -->
+<div class="text-center">
+<p class="text-gray-400 uppercase font-medium " >PM2.5</p>
+<p class="text-white text-3xl font-medium " >131.55</p>
+</div>
+
+<!-- 1 -->
+<div class="text-center">
+<p class="text-gray-400 uppercase font-medium " >PM2.5</p>
+<p class="text-white text-3xl font-medium " >131.55</p>
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+<!-- sunset & sunrise -->
+    <div class="col-span-1 w-full bg-secondary rounded-xl pb-5 p-3">
+
+        <!-- title -->
+<h1 class="text-gray-400 capitalize text-lg font-medium " >sunrise & sunset</h1>
+
+<!-- sunrise & ssunset -->
+<div class=""> 
+    <!-- sunrise -->
+     <div class="py-2 flex gap-2  flex-wrap ">
+        <!-- sunrise icon -->
+         <div class=" ">
+  <svg fill="#fff" width="70px" height="70px" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><path d="M 28.0108 24.2502 C 28.9722 24.2502 29.7806 23.3762 29.7806 22.3056 L 29.7806 14.1339 L 29.5185 10.8347 L 31.1353 12.6919 L 33.8665 15.4449 C 34.1942 15.7508 34.6093 15.9474 35.0463 15.9474 C 35.9203 15.9474 36.5321 15.3575 36.5321 14.4835 C 36.5321 14.0247 36.3791 13.6751 36.0077 13.3255 L 29.1907 6.9892 C 28.7319 6.5741 28.4041 6.4211 28.0108 6.4211 C 27.5957 6.4211 27.2898 6.5741 26.8310 6.9892 L 20.0140 13.3255 C 19.6426 13.6751 19.4896 14.0247 19.4896 14.4835 C 19.4896 15.3575 20.1014 15.9474 20.9754 15.9474 C 21.3905 15.9474 21.8275 15.7508 22.1334 15.4449 L 25.0830 12.4734 L 26.4814 10.8347 L 26.2192 14.1339 L 26.2192 22.3056 C 26.2192 23.3762 27.0495 24.2502 28.0108 24.2502 Z M 39.2631 30.2369 C 39.9625 30.9142 41.1206 30.9142 41.9287 30.1277 L 45.7305 26.3259 C 46.5390 25.5174 46.5171 24.3813 45.8182 23.7039 C 45.1626 23.0048 44.0046 22.9829 43.1960 23.7913 L 39.3942 27.5931 C 38.6078 28.4016 38.5859 29.5814 39.2631 30.2369 Z M 16.7366 30.2369 C 17.4139 29.5595 17.4139 28.4016 16.6055 27.5931 L 12.8037 23.7913 C 11.9953 22.9829 10.8810 23.0266 10.1818 23.7039 C 9.4826 24.3594 9.4826 25.5174 10.2910 26.3259 L 14.0928 30.1277 C 14.9013 30.9142 16.0592 30.9361 16.7366 30.2369 Z M 1.9009 51.9551 L 54.0991 51.9551 C 55.1476 51.9551 56.0000 51.1686 56.0000 50.1853 C 56.0000 49.2240 55.1476 48.4374 54.0991 48.4374 L 37.6901 48.4374 C 39.1103 46.4928 39.9625 44.1112 39.9625 41.5111 C 39.9625 34.9563 34.5219 29.5377 28.0108 29.5377 C 21.4779 29.5377 16.0592 34.9563 16.0592 41.5111 C 16.0592 44.1112 16.8895 46.4928 18.3316 48.4374 L 1.9009 48.4374 C .8740 48.4374 0 49.2240 0 50.1853 C 0 51.1686 .8740 51.9551 1.9009 51.9551 Z M 19.5770 41.5111 C 19.5770 36.8791 23.3788 33.0773 28.0108 33.0773 C 32.6429 33.0773 36.4447 36.8791 36.4447 41.5111 C 36.4447 44.3952 34.9589 46.9516 32.7085 48.4374 L 23.2914 48.4374 C 21.0628 46.9516 19.5770 44.3952 19.5770 41.5111 Z M 4.7413 42.7347 L 10.1162 42.7347 C 11.2524 42.7347 12.1045 41.9263 12.0827 40.9649 C 12.0608 39.9817 11.2524 39.1733 10.1162 39.1733 L 4.7413 39.1733 C 3.6051 39.1733 2.7967 39.9817 2.7967 40.9649 C 2.7967 41.9263 3.6051 42.7347 4.7413 42.7347 Z M 45.9054 42.7347 L 51.2805 42.7347 C 52.3947 42.7347 53.2248 41.9263 53.2248 40.9649 C 53.2248 39.9817 52.3947 39.1733 51.2805 39.1733 L 45.9054 39.1733 C 44.7693 39.1733 43.9173 39.9817 43.9392 40.9649 C 43.9607 41.9263 44.7693 42.7347 45.9054 42.7347 Z"/></svg>
+     </div>
+         <div class="">
+            <p class="text-gray-400 font-medium" >Sunrise</p>
+            <h1 id="sunRise" class="text-white text-3xl font-semibold pt-2 " >05:39 AM</h1>
+        </div>
+     </div>
+</div>
+
+    <!-- sunset -->
+     <div class="py-2 flex gap-2  flex-wrap ">
+        <!-- sunset icon -->
+         <div class=" ">
+  <svg fill="#fff" width="70px" height="70px" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><path d="M 28.0108 24.2502 C 28.4041 24.2502 28.7319 24.0972 29.1907 23.6821 L 36.0077 17.3239 C 36.3791 16.9743 36.5321 16.6248 36.5321 16.1659 C 36.5321 15.3138 35.9203 14.7020 35.0463 14.7020 C 34.6093 14.7020 34.1942 14.8987 33.8665 15.2046 L 31.1353 17.9576 L 29.5185 19.8366 L 29.7806 16.5374 L 29.7806 8.3438 C 29.7806 7.2733 28.9722 6.4211 28.0108 6.4211 C 27.0495 6.4211 26.2192 7.2733 26.2192 8.3438 L 26.2192 16.5374 L 26.4814 19.8366 L 25.0830 18.1761 L 22.1334 15.2046 C 21.8275 14.8987 21.3905 14.7020 20.9754 14.7020 C 20.1014 14.7020 19.4896 15.3138 19.4896 16.1659 C 19.4896 16.6248 19.6426 16.9743 20.0140 17.3239 L 26.8310 23.6821 C 27.2898 24.0972 27.5957 24.2502 28.0108 24.2502 Z M 39.2631 30.2369 C 39.9625 30.9142 41.1206 30.9142 41.9287 30.1277 L 45.7305 26.3259 C 46.5390 25.5174 46.5171 24.3813 45.8182 23.7039 C 45.1626 23.0048 44.0046 22.9829 43.1960 23.7913 L 39.3942 27.5931 C 38.6078 28.4016 38.5859 29.5814 39.2631 30.2369 Z M 14.0928 30.1277 C 14.9013 30.9142 16.0592 30.9361 16.7366 30.2369 C 17.4139 29.5595 17.4139 28.4016 16.6055 27.5931 L 12.8037 23.7913 C 11.9953 22.9829 10.8810 23.0266 10.1818 23.7039 C 9.4826 24.3594 9.4826 25.5174 10.2910 26.3259 Z M 1.9009 51.9551 L 54.0991 51.9551 C 55.1476 51.9551 56.0000 51.1686 56.0000 50.1853 C 56.0000 49.2240 55.1476 48.4374 54.0991 48.4374 L 37.6901 48.4374 C 39.1103 46.4928 39.9625 44.1112 39.9625 41.5111 C 39.9625 34.9563 34.5219 29.5377 28.0108 29.5377 C 21.4779 29.5377 16.0592 34.9563 16.0592 41.5111 C 16.0592 44.1112 16.8895 46.4928 18.3316 48.4374 L 1.9009 48.4374 C .8740 48.4374 0 49.2240 0 50.1853 C 0 51.1686 .8740 51.9551 1.9009 51.9551 Z M 19.5770 41.5111 C 19.5770 36.8791 23.3788 33.0773 28.0108 33.0773 C 32.6429 33.0773 36.4447 36.8791 36.4447 41.5111 C 36.4447 44.3952 34.9589 46.9516 32.7085 48.4374 L 23.2914 48.4374 C 21.0628 46.9516 19.5770 44.3952 19.5770 41.5111 Z M 4.7413 42.7347 L 10.1162 42.7347 C 11.2524 42.7347 12.1045 41.9263 12.0827 40.9649 C 12.0608 39.9817 11.2524 39.1733 10.1162 39.1733 L 4.7413 39.1733 C 3.6051 39.1733 2.7967 39.9817 2.7967 40.9649 C 2.7967 41.9263 3.6051 42.7347 4.7413 42.7347 Z M 45.9054 42.7347 L 51.2805 42.7347 C 52.3947 42.7347 53.2248 41.9263 53.2248 40.9649 C 53.2248 39.9817 52.3947 39.1733 51.2805 39.1733 L 45.9054 39.1733 C 44.7693 39.1733 43.9173 39.9817 43.9392 40.9649 C 43.9607 41.9263 44.7693 42.7347 45.9054 42.7347 Z"/></svg>
+         </div>
+         <div class="">
+            <p class="text-gray-400 font-medium" >Sunset</p>
+            <h1 id="sunSet" class="text-white text-3xl font-semibold pt-2 " >05:39 AM</h1>
+        </div>
+     </div>
+</div>
+
+
+
+
+    </div>
+
+<!-- other details -->
+<div class="w-full flex flex-wrap gap-3  mb-7 ">
+
+    <!-- humidity -->
+<div class=" bg-secondary rounded-xl pb-5 mt-3 p-3">
+<h1 class="capitalize text-gray-400 text-sm md:text-base py-1 ">humidity</h1>
+    <div class="flex items-center justify-between min-w-40 gap-2 ">
+        <!-- icon -->
+        <div class="">
+            <img src="./icons/humidity.svg" class="w-7 md:w-10"  alt="">
+        </div>
+    <h1 id="currentHumidity" class="text-white text-xl md:text-3xl " >70%</h1>
+</div>
+</div>
+
+    <!-- pressure -->
+<div class=" bg-secondary rounded-xl pb-5 mt-3 p-3">
+<h1 class="capitalize text-gray-400 text-sm md:text-base py-1 ">pressure</h1>
+    <div class="flex items-center justify-between min-w-36 ">
+        <!-- icon -->
+        <div class="">
+            <img src="./icons/pressure.svg" class="w-7 md:w-10"  alt="">
+        </div>
+    <h1 id="pressure" class="text-white text-xl md:text-3xl ml-3 " >1007hPa</h1>
+</div>
+</div>
+
+
+    <!-- visibility -->
+<div class=" bg-secondary rounded-xl pb-5 mt-3 p-3">
+<h1 class="capitalize text-gray-400 text-sm md:text-base py-1 ">visibility</h1>
+    <div class="flex items-center justify-between min-w-36 ">
+        <!-- icon -->
+        <div class="">
+            <img src="./icons/visibility.svg" class="w-7 md:w-10"  alt="">
+        </div>
+    <h1 id="visibility" class="text-white text-xl md:text-3xl ml-3 " >3.5Km</h1>
+</div>
+</div>
+
+
+    <!-- wind speed -->
+<div class=" bg-secondary rounded-xl pb-5 mt-3 p-3">
+<h1 class="capitalize text-gray-400 text-sm md:text-base py-1 "> wind speed </h1>
+    <div class="flex items-center justify-between min-w-36 ">
+        <!-- icon -->
+        <div class="">
+            <img src="./icons/direction.svg" class="w-7 md:w-10"  alt="">
+        </div>
+    <h1 id="currentWindSpeed"  class="text-white text-xl md:text-3xl ml-3 " >2.5m/s</h1>
+</div>
+</div>
+
+
+    <!-- feels like -->
+<div class=" bg-secondary rounded-xl pb-5 mt-3 p-3">
+<h1 class="capitalize text-gray-400 text-sm md:text-base py-1 ">feels like</h1>
+    <div class="flex items-center justify-between min-w-36 ">
+        <!-- icon -->
+        <div class="">
+            <img src="./icons/temperature.svg" class="w-7 md:w-10"  alt="">
+        </div>
+    <h1 id="currentTemperature" class="text-white text-xl md:text-3xl ml-3 " >37.05&deg;C</h1>
+</div>
+</div>
+
+
+
+
+
+
+<!-- end other details -->
+</div>
+
+<!-- today at -->
+<div class="">
+<h1 class="text-white text-2xl pt-2   " >Today at</h1>
+<!-- cards -->
+ <div id="hourlyForecastCard" class="flex flex-wrap gap-3  ">
+
+<!-- card1 -->
+<div class=" bg-secondary rounded-xl pb-5 mt-3 p-3 
+ flex flex-col items-center
+ ">
+<p class="uppercase text-gray-400 " >6am</p>
+<img src="https://openweathermap.org/img/wn/02d.png"  alt="weather image">
+<p class="uppercase text-gray-400 " >12.00&deg;C</p>
+</div>
+
+<!-- card1 -->
+<div class=" bg-secondary rounded-xl pb-5 mt-3 p-3 
+ flex flex-col items-center
+ ">
+<p class="uppercase text-gray-400 " >6am</p>
+<img src="https://openweathermap.org/img/wn/02d.png"  alt="weather image">
+<p class="uppercase text-gray-400 " >12.00&deg;C</p>
+</div>
+
+<!-- card1 -->
+<div class=" bg-secondary rounded-xl pb-5 mt-3 p-3 
+ flex flex-col items-center
+ ">
+<p class="uppercase text-gray-400 " >6am</p>
+<img src="https://openweathermap.org/img/wn/02d.png"  alt="weather image">
+<p class="uppercase text-gray-400 " >12.00&deg;C</p>
+</div>
+
+<!-- card2 -->
+<div class=" bg-secondary rounded-xl pb-5 mt-3 p-3 
+ flex flex-col items-center
+ ">
+<p class="uppercase text-gray-400 " >6am</p>
+<img src="https://openweathermap.org/img/wn/02d.png"  alt="weather image">
+<p class="uppercase text-gray-400 " >12.00&deg;C</p>
+</div>
+
+<!-- card3 -->
+<div class=" bg-secondary rounded-xl pb-5 mt-3 p-3 
+ flex flex-col items-center
+ ">
+<p class="uppercase text-gray-400 " >6am</p>
+<img src="https://openweathermap.org/img/wn/02d.png"  alt="weather image">
+<p class="uppercase text-gray-400 " >12.00&deg;C</p>
+</div>
+
+<!-- card4 -->
+<div class=" bg-secondary rounded-xl pb-5 mt-3 p-3 
+ flex flex-col items-center
+ ">
+<p class="uppercase text-gray-400 " >6am</p>
+<img src="https://openweathermap.org/img/wn/02d.png"  alt="weather image">
+<p class="uppercase text-gray-400 " >12.00&deg;C</p>
+</div>
+
+<!-- card5 -->
+<div class=" bg-secondary rounded-xl pb-5 mt-3 p-3 
+ flex flex-col items-center
+ ">
+<p class="uppercase text-gray-400 " >6am</p>
+<img src="https://openweathermap.org/img/wn/02d.png"  alt="weather image">
+<p class="uppercase text-gray-400 " >12.00&deg;C</p>
+</div>
+
+<!-- card6 -->
+<div class=" bg-secondary rounded-xl pb-5 mt-3 p-3 
+ flex flex-col items-center
+ ">
+<p class="uppercase text-gray-400 " >6am</p>
+<img src="https://openweathermap.org/img/wn/02d.png"  alt="weather image">
+<p class="uppercase text-gray-400 " >12.00&deg;C</p>
+</div>
+
+ </div>
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+<!-- end hero -->
+</div>
+
+<!-- end wrapper -->
+</div>
+
+
+
+<script src="https://momentjs.com/downloads/moment.min.js"></script>
+     <script src="./script.js" ></script>
+</body>
+</html>
+
+
+
+

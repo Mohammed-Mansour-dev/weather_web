@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+
+h1{
+    font-family: "Outfit", sans-serif;
+}
+p{
+    font-family: "Outfit", sans-serif;
+}
+
+/* Base style for the notification */
+.notification {
+    color: red;
+    background-color: #ffeeee;
+    padding: 8px;
+    border: 1px solid red;
+    border-radius: 5px;
+    margin-top: 5px;
+
+    /* Animation properties */
+    opacity: 0;               /* Start fully transparent */
+    visibility: hidden;       /* Hidden from view */
+    transform: translateY(-10px); /* Slightly shifted up */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+/* Class to show the notification with animation */
+.notification.show {
+    opacity: 1;                /* Fully visible */
+    visibility: visible;       /* Show in view */
+    transform: translateY(0);  /* Slide into place */}
